@@ -1,7 +1,6 @@
 package com.is1di.quoteapi.controller;
 
 import com.is1di.quoteapi.mapper.QuoteMapper;
-import com.is1di.quoteapi.model.dto.QuoteDto;
 import com.is1di.quoteapi.model.dto.QuoteDto.Create;
 import com.is1di.quoteapi.model.dto.QuoteDto.Output;
 import com.is1di.quoteapi.model.dto.QuoteDto.Update;
@@ -23,13 +22,13 @@ public class QuoteController {
 
     @PostMapping
     public Output create(@RequestBody Create quote, String userLogin) {
-        return quoteMapper.toOutput(quoteService.create(quoteMapper.toEntity(quote),userLogin));
+        return quoteMapper.toOutput(quoteService.create(quoteMapper.toEntity(quote), userLogin));
     }
 
     @GetMapping
-    public Page<Output> page(@RequestParam(value = "page",required = false,defaultValue = "1") int page,
-                             @RequestParam(value = "limit",required = false,defaultValue = "10") int limit) {
-        return quoteService.page(page,limit).map(quoteMapper::toOutput);
+    public Page<Output> page(@RequestParam(value = "page", required = false, defaultValue = "1") int page,
+                             @RequestParam(value = "limit", required = false, defaultValue = "10") int limit) {
+        return quoteService.page(page, limit).map(quoteMapper::toOutput);
     }
 
     @GetMapping("rand")
@@ -38,8 +37,8 @@ public class QuoteController {
     }
 
     @PutMapping("{id}")
-    public Output update(@PathVariable UUID id, @RequestBody Update quote) {
-        return quoteMapper.toOutput(quoteService.update(id, quote, quoteMapper::toUpdate));
+    public Output update(@PathVariable UUID id, @RequestBody Update quote, @RequestParam("user") String userLogin) {
+        return quoteMapper.toOutput(quoteService.update(id, userLogin, quote, quoteMapper::toUpdate));
     }
 
     @GetMapping("{id}")

@@ -12,7 +12,9 @@ import java.util.UUID;
 
 @Repository
 public interface QuoteRepository extends JpaRepository<Quote, UUID> {
-    @Query("select distinct q from Quote q left join q.votes v where v.isUpVoted = :#{upVoted} order by max() limit 10")
+    List<Quote> findByVotes_IsUpVotedOrderByVotes_IsUpVotedAsc(boolean isUpVoted);
+
+    @Query("from Quote q group by q order by (select sum(case when (v.isUpVoted = :upVoted) then 1 else 0 end) from Vote v where q.id = v.quote.id ) desc ")
     List<Quote> findByVotesIsUpVoted(@Param("upVoted") boolean upVoted);
 
     @Query("from Quote order by random() limit 1")

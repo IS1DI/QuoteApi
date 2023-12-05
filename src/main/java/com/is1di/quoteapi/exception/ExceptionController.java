@@ -19,4 +19,12 @@ public class ExceptionController {
                 messageService.getMessage(ex.getMessageBase())
         );
     }
+
+    @ExceptionHandler(AccessDeniedException.class)
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    public ExceptionMessage accessDenied(AccessDeniedException ex) {
+        return new ExceptionMessage(
+                messageService.getMessage(ex.getMessageBase())
+        );
+    }
 }

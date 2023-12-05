@@ -7,5 +7,6 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring")
 public interface UserMapper {
     UserDto.Output toOutput(User user);
+
     User toEntity(UserDto.Create user);
 }

@@ -28,7 +28,7 @@ public class VoteByQuoteController {
                             @RequestParam(value = "user", required = false, defaultValue = "") String userLogin) {
         if (userLogin.isBlank()) {
             return voteService.getByQuote(quoteId, page, limit).map(voteMapper::toOutput);
-        }else {
+        } else {
             return voteService.getByUserAndQuote(userLogin, quoteId, page, limit).map(voteMapper::toOutput);
         }
     }

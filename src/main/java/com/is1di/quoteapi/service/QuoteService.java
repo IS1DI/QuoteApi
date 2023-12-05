@@ -1,5 +1,6 @@
 package com.is1di.quoteapi.service;
 
+import com.is1di.quoteapi.exception.AccessDeniedException;
 import com.is1di.quoteapi.exception.NotFoundException;
 import com.is1di.quoteapi.message.MessageBase;
 import com.is1di.quoteapi.model.entity.Quote;
@@ -33,6 +34,15 @@ public class QuoteService {
                 ));
     }
 
+    public Quote getByIdAndUser(UUID quoteId, String userLogin) {
+        Quote quote;
+        if ((quote = getById(quoteId)).getOwner().getLogin().equals(userLogin)) {
+            return quote;
+        } else throw new AccessDeniedException(
+                new MessageBase(MessageBase.MessageMethod.QUOTE_ACCESS_DENIED)
+        );
+    }
+
     public Quote getRandom() {
         return quoteRepository.findRandom()
                 .orElseThrow(() -> new NotFoundException(
@@ -40,8 +50,8 @@ public class QuoteService {
                 ));
     }
 
-    public <DTO> Quote update(UUID id, DTO dto, BiFunction<DTO, Quote, Quote> mapperToUpdate) {
-        return quoteRepository.save(mapperToUpdate.apply(dto, getById(id)));
+    public <DTO> Quote update(UUID id, String userLogin, DTO dto, BiFunction<DTO, Quote, Quote> mapperToUpdate) {
+        return quoteRepository.save(mapperToUpdate.apply(dto, getByIdAndUser(id, userLogin)));
     }
 
     public void delete(UUID id) {

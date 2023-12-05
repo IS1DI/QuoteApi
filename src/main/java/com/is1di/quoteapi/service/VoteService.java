@@ -23,7 +23,11 @@ public class VoteService {
     public Vote vote(UUID quoteId, String userLogin, boolean isUpVoted) {
         User user = userService.getByLogin(userLogin);
         Quote quote = quoteService.getById(quoteId);
-        return voteRepository.save(Vote.builder().votedBy(user).quote(quote).isUpVoted(isUpVoted).build());
+        Vote vote = new Vote();
+        vote.setVotedBy(user);
+        vote.setQuote(quote);
+        vote.setUpVoted(isUpVoted);
+        return voteRepository.save(vote);
     }
 
     public boolean existsByUserAndQuote(String userLogin, UUID quoteId) {

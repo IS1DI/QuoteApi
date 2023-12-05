@@ -12,7 +12,8 @@ public record MessageBase(
     public enum MessageMethod {
         USER_ERROR_NOT_FOUND("user.error.notFound"),
         QUOTE_NOT_FOUND("quote.error.notFound"),
-        VOTE_NOT_FOUND("vote.error.notFound");
+        VOTE_NOT_FOUND("vote.error.notFound"),
+        QUOTE_ACCESS_DENIED("quote.error.access");
 
         private final String message;
 

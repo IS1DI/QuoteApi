@@ -1,0 +1,16 @@
+version: '3.9'
+services:
+    coffee-machine:
+        image: is1di/quote-api:1.0.0
+        container_name: quote-api
+        ports:
+            - "80:80"
+        environment:
+            PORT: 80
+            DATA_PASS: user
+            DATA_USER: pass
+        networks:
+            - backend
+networks:
+    backend:
+        driver: bridge

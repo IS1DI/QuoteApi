@@ -2,7 +2,7 @@ FROM eclipse-temurin:21 as app-build
 ENV RELEASE=21
 
 WORKDIR /opt/build
-COPY ./build/libs/QuoteApi-*.jar ./application.jar
+COPY ./build/libs/QuoteAPI-*.jar ./application.jar
 
 RUN java -Djarmode=layertools -jar application.jar extract
 RUN $JAVA_HOME/bin/jlink \

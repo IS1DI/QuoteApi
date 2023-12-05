@@ -9,7 +9,7 @@ public class VoteDto {
     @Data
     public static final class Output {
         private UUID id;
-        private String votedByLogin;
+        private String votedBy;
         private UUID quoteId;
         private LocalDateTime createdAt;
         private boolean isUpVoted;

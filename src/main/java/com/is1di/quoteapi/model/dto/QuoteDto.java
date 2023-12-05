@@ -1,11 +1,8 @@
 package com.is1di.quoteapi.model.dto;
 
 import lombok.Data;
-import lombok.Value;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -22,10 +19,12 @@ public class QuoteDto {
         private Long upVotesCount;
         private Long votesCount;
     }
+
     @Data
     public static final class Create {
         private String content;
     }
+
     @Data
     public static final class Update {
         private String content;

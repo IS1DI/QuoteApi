@@ -15,6 +15,6 @@ public class MessageService {
 
     public String getMessage(MessageBase messageBase) {
         Locale locale = LocaleContextHolder.getLocale();
-        return messageSource.getMessage(messageBase.method().getMessage(),messageBase.args(),locale);
+        return messageSource.getMessage(messageBase.method().getMessage(), messageBase.args(), locale);
     }
 }

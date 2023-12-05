@@ -14,6 +14,7 @@ import java.util.UUID;
 public interface QuoteRepository extends JpaRepository<Quote, UUID> {
     @Query("select distinct q from Quote q left join q.votes v where v.isUpVoted = :#{upVoted} order by max() limit 10")
     List<Quote> findByVotesIsUpVoted(@Param("upVoted") boolean upVoted);
+
     @Query("from Quote order by random() limit 1")
     Optional<Quote> findRandom();
 }

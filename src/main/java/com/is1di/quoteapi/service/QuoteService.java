@@ -55,4 +55,4 @@ public class QuoteService {
     public Page<Quote> page(int page, int limit) {
         return quoteRepository.findAll(PageRequest.of(Math.max(page, 1) - 1, Math.max(limit, 1)));
     }
- }
+}

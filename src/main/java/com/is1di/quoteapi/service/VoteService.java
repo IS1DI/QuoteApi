@@ -1,7 +1,5 @@
 package com.is1di.quoteapi.service;
 
-import com.is1di.quoteapi.exception.NotFoundException;
-import com.is1di.quoteapi.message.MessageBase;
 import com.is1di.quoteapi.model.entity.Quote;
 import com.is1di.quoteapi.model.entity.User;
 import com.is1di.quoteapi.model.entity.Vote;
@@ -9,7 +7,6 @@ import com.is1di.quoteapi.repository.VoteRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,7 +31,7 @@ public class VoteService {
     }
 
     public Page<Vote> getByUserAndQuote(String userLogin, UUID quoteId, int page, int limit) {
-        return voteRepository.findByVotedBy_LoginAndQuote_IdOrderByCreatedAtAsc(userLogin, quoteId, PageRequest.of(Math.max(page,1) - 1, Math.max(limit, 1)));
+        return voteRepository.findByVotedBy_LoginAndQuote_IdOrderByCreatedAtAsc(userLogin, quoteId, PageRequest.of(Math.max(page, 1) - 1, Math.max(limit, 1)));
     }
 
     public Page<Vote> getByQuote(UUID quoteId, int page, int limit) {

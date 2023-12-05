@@ -1,7 +1,6 @@
 package com.is1di.quoteapi.exception;
 
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDateTime;
 

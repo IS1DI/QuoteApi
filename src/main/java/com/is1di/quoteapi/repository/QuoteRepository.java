@@ -12,8 +12,6 @@ import java.util.UUID;
 
 @Repository
 public interface QuoteRepository extends JpaRepository<Quote, UUID> {
-    List<Quote> findByVotes_IsUpVotedOrderByVotes_IsUpVotedAsc(boolean isUpVoted);
-
     @Query("from Quote q group by q order by (select sum(case when (v.isUpVoted = :upVoted) then 1 else 0 end) from Vote v where q.id = v.quote.id ) desc ")
     List<Quote> findByVotesIsUpVoted(@Param("upVoted") boolean upVoted);
 
